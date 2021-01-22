@@ -105,5 +105,34 @@ namespace OnTheBeach_CodingExercise_Test
             }
         }
 
+        [TestMethod]
+        public void Test_SelfDependent1()
+        {
+            string line = "a => b";
+            JobInputParser parser = new JobInputParser();
+            try
+            {
+                Job job = parser.getInput(line);
+            }
+            catch (Exception ex)
+            {
+                StringAssert.Contains(ex.Message, "Self-dependent");
+            }
+        }
+
+        [TestMethod]
+        public void Test_SelfDependent2()
+        {
+            string line = "b => b";
+            JobInputParser parser = new JobInputParser();
+            try
+            {
+                Job job = parser.getInput(line);
+            }
+            catch (Exception ex)
+            {
+                StringAssert.Contains(ex.Message, "Self-dependent");
+            }
+        }
     }
 }

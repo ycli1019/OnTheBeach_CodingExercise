@@ -32,7 +32,6 @@ namespace OnTheBeach_CodingExercise
             if (lineComponents.Length > 3)
                 throw new ArgumentException("Invalid job dependency format.");
 
-
             // Validate job name
             Regex alphabetPattern = new Regex("^[a-zA-Z]{1}$");
             if (!alphabetPattern.IsMatch(lineComponents[0]))
@@ -48,6 +47,8 @@ namespace OnTheBeach_CodingExercise
             else
             {
                 nextJobName = char.Parse(lineComponents[2]);
+                if (jobName.Equals(nextJobName))
+                    throw new ArgumentException("Self-dependent.");
                 return new DependentJob(jobName, nextJobName);
             }
         }

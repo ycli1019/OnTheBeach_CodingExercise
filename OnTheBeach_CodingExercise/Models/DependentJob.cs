@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnTheBeach_CodingExercise.Models
 {
-    class DependentJob: Job
+    public class DependentJob: Job
     {
         private readonly char _jobName;
         private readonly char _nextJobName;

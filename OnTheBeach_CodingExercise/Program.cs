@@ -14,18 +14,21 @@ namespace OnTheBeach_CodingExercise
         {
             // interactive design, will return the sequence after each line of input
             JobInputParser inputParser = new JobInputParser();
+            JobRepository repository = new JobRepository();
+            List<string> lines = new List<string>();
 
-            while(true)
+            Console.Out.WriteLine("Please enter job dependencies (e.g.: a => b and enter, empty line to quit): ");
+            while (true)
             {
                 bool bQuit = false;
 
                 try
                 {
-                    Console.Out.Write("Please enter a job dependency (e.g.: a => b, Enter to quit): ");
                     string line = Console.ReadLine();
                     if (line.Trim().Equals(string.Empty))
                         bQuit = true;
-                    Job job = inputParser.getInput(line);
+                    else
+                        lines.Add(line);
                     if (bQuit)
                         break;
                 }
@@ -35,7 +38,36 @@ namespace OnTheBeach_CodingExercise
                 }
             }
 
+            foreach (string line in lines)
+            {
+                try
+                {
+                    Job job = inputParser.getInput(line);
+                    repository.addJob(job);
+                }
+                catch (Exception ex)
+                {
+                    Console.Out.WriteLine(ex.Message);
+                    Console.Out.WriteLine("Program ends.");
+                    Console.ReadKey();
+                    return;
+                }
+            }
+
+            try
+            {
+                Console.WriteLine("Dependency: " + repository.showDependancies());
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine(ex.Message);
+                Console.Out.WriteLine("Program ends.");
+                Console.ReadKey();
+                return;
+            }
+            
             Console.Out.WriteLine("Program ends.");
+            Console.ReadKey();
         }
     }
 }
