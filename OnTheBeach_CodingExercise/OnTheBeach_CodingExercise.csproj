@@ -43,6 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JobInputParser.cs" />
+    <Compile Include="Models\DependentJob.cs" />
+    <Compile Include="Models\IndependentJob.cs" />
+    <Compile Include="Models\Job.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
