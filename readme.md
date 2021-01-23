@@ -13,11 +13,12 @@ Classes:
       - Firstly find out all end node
       - Then find its parent node recursively
       - the dependency should be the reverse order of node searching (bottom-up approach)
-6. JobsValidator - it handles exceptions:
+6. JobFactory - to read jobs from Console or from a text file
+7. JobsValidator - it handles exceptions:
    - Unspecified Job (a => b, where missing b => )
    - Duplicate job (a => b, a => c. where a is duplicate)
    - Circular dependent (a => b, b => c, c => a)
-7. UnitTest_JobInputParser - Unit test class of JobInputParser
+8. UnitTest_JobInputParser - Unit test class of JobInputParser
    - Test_DependentJob (a => b)
    - Test_IndependentJob (a =>)
    - Test_InvalidDependencySign1 (missing =>)
@@ -27,7 +28,7 @@ Classes:
    - Test_InvalidNextJobName (c => ab)
    - Test_SelfDependent1 (normal flow: a => b)
    - Test_SelfDependent2 (Exceptional flow: a => a)
-8. UnitTest_JobsValidator - Unit test class of JobsValidator
+9. UnitTest_JobsValidator - Unit test class of JobsValidator
    - Test_checkMultipleJobName1 (normal flow)
    - Test_checkMultipleJobName2 (exceptional flow: a => b, a => c)
    - Test_checkUnspecifiedNextJob1 (normal flow)
@@ -37,7 +38,10 @@ Classes:
    - Test_checkCircularDependent3 (normal flow: 2 trees)
    - Test_checkCircularDependent4 (exceptional flow: 1 loop + 1 tree)
    - Test_checkCircularDependent5 (exceptional flow: 1 loop + 1 tree)
-9. UnitTest_JobRepository  - Unit test class of JobsRepository
+10. UnitTest_JobRepository  - Unit test class of JobsRepository
    - Test_showDependencies1 (single tree: a => b, b => c, c => )
    - Test_showDependencies2 (2 trees)
    - Test_showDependencies2 (2 trees)
+11. UnitTest_JobFactory  - Unit test class of JobFactory
+   - Test_readJobsFromConsole 
+   - Test_readJobsFromFile
