@@ -12,46 +12,19 @@ namespace OnTheBeach_CodingExercise
     {
         static void Main(string[] args)
         {
-            // interactive design, will return the sequence after each line of input
-            JobInputParser inputParser = new JobInputParser();
-            JobRepository repository = new JobRepository();
-            List<string> lines = new List<string>();
+            JobFactory factory = new JobFactory();
+            JobRepository repository = null;
 
-            Console.Out.WriteLine("Please enter job dependencies (e.g.: a => b and enter, empty line to quit): ");
-            while (true)
+            try 
             {
-                bool bQuit = false;
-
-                try
-                {
-                    string line = Console.ReadLine();
-                    if (line.Trim().Equals(string.Empty))
-                        bQuit = true;
-                    else
-                        lines.Add(line);
-                    if (bQuit)
-                        break;
-                }
-                catch (Exception ex)
-                {
-                    Console.Out.WriteLine(ex.Message);
-                }
+                repository = factory.readJobsFromConsole();
             }
-
-            foreach (string line in lines)
+            catch (Exception ex)
             {
-                try
-                {
-                    Job job = inputParser.getInput(line);
-                    repository.addJob(job);
-                }
-                catch (Exception ex)
-                {
-                    Console.Out.WriteLine(ex.Message);
-                    Console.Out.WriteLine("Program ends.");
-                    Console.ReadKey();
-                    return;
-                }
+                Console.Out.WriteLine(ex.Message);
+                Console.Out.WriteLine("Program ends.");
+                Console.ReadKey();
+                return;
             }
 
             try

@@ -24,8 +24,18 @@ namespace OnTheBeach_CodingExercise
         {
             return new JobsValidator(_jobs);
         }
-
-
+        public override string ToString()
+        {
+            string result = string.Empty;
+            foreach (Job j in _jobs)
+            {
+                if (result.Equals(string.Empty))
+                    result = j.ToString();
+                else
+                    result = result + Environment.NewLine + j.ToString();
+            }
+            return result;
+        }
         public string showDependancies()
         {
             JobsValidator validator = CreateValidator();

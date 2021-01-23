@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JobFactory.cs" />
     <Compile Include="JobInputParser.cs" />
     <Compile Include="JobRepository.cs" />
     <Compile Include="JobsValidator.cs" />
