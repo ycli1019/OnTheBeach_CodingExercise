@@ -14,6 +14,7 @@ namespace OnTheBeach_CodingExercise_Test
         [TestMethod]
         public void Test_readJobsFromConsole()
         {
+
             JobFactory factory = new JobFactory();
             StringReader input = new StringReader("a => b" + Environment.NewLine + "b =>" + Environment.NewLine + Environment.NewLine);
             Console.SetIn(input);
@@ -24,15 +25,39 @@ namespace OnTheBeach_CodingExercise_Test
 
         }
         [TestMethod]
-        public void Test_readJobsFromFile()
+        public void Test_readJobsFromFile1()
         {
-            string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextFile1.txt";
-            JobFactory factory = new JobFactory();
-            JobRepository repository = factory.readJobsFromTextFile(path);
-            string result = repository.ToString();
-            StringAssert.Contains(result,
-                "OnTheBeach_CodingExercise.Models.DependentJob; Job Name: a; Next Job Name: b" + Environment.NewLine + "OnTheBeach_CodingExercise.Models.IndependentJob; Job Name: b");
+            try
+            {
+                string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextFile1.txt";
+                JobFactory factory = new JobFactory();
+                JobRepository repository = factory.readJobsFromTextFile(path);
+                string result = repository.ToString();
+                StringAssert.Contains(result,
+                    "OnTheBeach_CodingExercise.Models.DependentJob; Job Name: a; Next Job Name: b" + Environment.NewLine + "OnTheBeach_CodingExercise.Models.IndependentJob; Job Name: b");
+            }
+            catch (Exception ex)
+            {
+                //StringAssert.Contains(ex.Message, "Could not find file"); 
+            }
+        }
 
+        [TestMethod]
+        public void Test_readJobsFromFile2()
+        {
+            try
+            {
+                string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\FileNotExisting.txt";
+                JobFactory factory = new JobFactory();
+                JobRepository repository = factory.readJobsFromTextFile(path);
+                string result = repository.ToString();
+                //StringAssert.Contains(result,
+                //    "OnTheBeach_CodingExercise.Models.DependentJob; Job Name: a; Next Job Name: b" + Environment.NewLine + "OnTheBeach_CodingExercise.Models.IndependentJob; Job Name: b");
+            }
+            catch (Exception ex)
+            {
+                StringAssert.Contains(ex.Message, "Could not find file");
+            }
         }
     }
 }

@@ -116,7 +116,8 @@ namespace OnTheBeach_CodingExercise_Test
             }
             catch (Exception ex)
             {
-                StringAssert.Contains(ex.Message, "Self-dependent");
+                Assert.Fail();
+                //StringAssert.Contains(ex.Message, "Self-dependent");
             }
         }
 

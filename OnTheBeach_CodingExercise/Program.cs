@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using OnTheBeach_CodingExercise.Models;
+using System.IO;
+using System.Reflection;
 
 namespace OnTheBeach_CodingExercise
 {
@@ -18,6 +20,10 @@ namespace OnTheBeach_CodingExercise
             try 
             {
                 repository = factory.readJobsFromConsole();
+                /*
+                string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextFile1.txt";
+                repository = factory.readJobsFromTextFile(path);
+                */
             }
             catch (Exception ex)
             {

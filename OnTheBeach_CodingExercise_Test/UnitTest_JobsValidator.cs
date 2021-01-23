@@ -26,7 +26,8 @@ namespace OnTheBeach_CodingExercise_Test
             }
             catch (Exception ex)
             {
-                StringAssert.Contains(ex.Message, "Multiple entries of a single job name is not supported.");
+                Assert.Fail();
+                //StringAssert.Contains(ex.Message, "Multiple entries of a single job name is not supported.");
             }
         }
 
@@ -71,7 +72,8 @@ namespace OnTheBeach_CodingExercise_Test
             }
             catch (Exception ex)
             {
-                StringAssert.Contains(ex.Message, "Unspecified job found.");
+                Assert.Fail();
+                //StringAssert.Contains(ex.Message, "Unspecified job found.");
             }
         }
 
@@ -115,7 +117,8 @@ namespace OnTheBeach_CodingExercise_Test
             }
             catch (Exception ex)
             {
-                StringAssert.Contains(ex.Message, "Circular dependency is not allowed");
+                Assert.Fail();
+                //StringAssert.Contains(ex.Message, "Circular dependency is not allowed");
             }
         }
 
@@ -159,7 +162,8 @@ namespace OnTheBeach_CodingExercise_Test
             }
             catch (Exception ex)
             {
-                StringAssert.Contains(ex.Message, "Circular dependency is not allowed");
+                Assert.Fail();
+                //StringAssert.Contains(ex.Message, "Circular dependency is not allowed");
             }
         }
 

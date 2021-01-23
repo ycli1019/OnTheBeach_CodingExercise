@@ -37,6 +37,7 @@ namespace OnTheBeach_CodingExercise
                 catch (Exception ex)
                 {
                     Console.Out.WriteLine(ex.Message);
+                    throw ex;
                 }
             }
 
