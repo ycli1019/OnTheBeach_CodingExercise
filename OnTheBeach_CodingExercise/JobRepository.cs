@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using OnTheBeach_CodingExercise.Models;
+using OnTheBeach_CodingExercise.Exceptions;
 
 namespace OnTheBeach_CodingExercise
 {
@@ -59,7 +60,7 @@ namespace OnTheBeach_CodingExercise
                 {
                     char temp = job.getNextJobName();
                 }
-                catch (InvalidOperationException ex)
+                catch (IndependentJobException ex)
                 {
                     //Starting with independent job
                     showJobDependencies(job, sortedJobsInReverseOrder);
@@ -85,7 +86,7 @@ namespace OnTheBeach_CodingExercise
                     if (job.getJobName().Equals(j.getNextJobName()))
                         js.Add(j);
                 }
-                catch (InvalidOperationException ex)
+                catch (IndependentJobException ex)
                 { 
                     // IndependentJob
                     // Do nothing

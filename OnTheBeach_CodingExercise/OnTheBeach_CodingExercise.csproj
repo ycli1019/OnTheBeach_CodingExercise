@@ -43,6 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\CircularDependentException.cs" />
+    <Compile Include="Exceptions\IndependentJobException.cs" />
+    <Compile Include="Exceptions\JobParseException.cs" />
+    <Compile Include="Exceptions\MultipleJobNameException.cs" />
+    <Compile Include="Exceptions\SelfDependentException.cs" />
+    <Compile Include="Exceptions\UnspecifiedNextJobException.cs" />
     <Compile Include="JobFactory.cs" />
     <Compile Include="JobInputParser.cs" />
     <Compile Include="JobRepository.cs" />

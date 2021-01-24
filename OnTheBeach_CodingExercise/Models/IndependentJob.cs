@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using OnTheBeach_CodingExercise.Exceptions;
+
 // IndependentJob: implements Job
 namespace OnTheBeach_CodingExercise.Models
 {
@@ -21,7 +23,7 @@ namespace OnTheBeach_CodingExercise.Models
         }
         public override char getNextJobName()
         {
-            throw new InvalidOperationException("Next job does not exist in independent jobs.");
+            throw new IndependentJobException("Next job does not exist in independent jobs.");
         }
         public override string ToString()
         {

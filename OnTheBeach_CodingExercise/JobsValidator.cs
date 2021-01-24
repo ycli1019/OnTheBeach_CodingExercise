@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using OnTheBeach_CodingExercise.Models;
+using OnTheBeach_CodingExercise.Exceptions;
 
 namespace OnTheBeach_CodingExercise
 {
@@ -22,7 +23,7 @@ namespace OnTheBeach_CodingExercise
             foreach (Job j in _jobs)
             {
                 if (_jobs.Count(item => j.getJobName().Equals(item.getJobName())) >= 2)
-                    throw new ArgumentException(string.Format("Multiple entries of a single job name is not supported. ({0})", j.getJobName()));
+                    throw new MultipleJobNameException(string.Format("Multiple entries of a single job name is not supported. ({0})", j.getJobName()));
             }
         }
 
@@ -33,9 +34,9 @@ namespace OnTheBeach_CodingExercise
                 try
                 {
                     if (_jobs.Count(item => j.getNextJobName().Equals(item.getJobName())) <= 0)
-                        throw new ArgumentException(string.Format("Unspecified job found. ({0})", j.getNextJobName()));
+                        throw new UnspecifiedNextJobException(string.Format("Unspecified job found. ({0})", j.getNextJobName()));
                 }
-                catch (InvalidOperationException ex)
+                catch (IndependentJobException ex)
                 {
                     //Independent Job
                     // Do nothing
@@ -48,7 +49,7 @@ namespace OnTheBeach_CodingExercise
             foreach (Job j in _jobs)
             {
                 if (checkJobCircularDependent(j, new List<char>()))
-                    throw new ArgumentException("Circular dependency is not allowed.");
+                    throw new CircularDependentException("Circular dependency is not allowed.");
             }
         }
         private bool checkJobCircularDependent(Job job, List<char> checkedJobNames)
@@ -64,7 +65,7 @@ namespace OnTheBeach_CodingExercise
                     return checkJobCircularDependent(nextJob, checkedJobNames);
                 }
             }
-            catch (InvalidOperationException ex)
+            catch (IndependentJobException ex)
             {
                 // Independent Job
                 return false;

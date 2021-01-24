@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
 using OnTheBeach_CodingExercise.Models;
+using OnTheBeach_CodingExercise.Exceptions;
 
 // Read console input and return job name and next job name
 namespace OnTheBeach_CodingExercise
@@ -26,16 +27,16 @@ namespace OnTheBeach_CodingExercise
 
             //Validate dependency sign here.
             if (lineComponents.Count(item => item.Equals("=>")) != 1 || !lineComponents[1].Equals("=>"))
-                throw new ArgumentException("Invalid dependency sign (=>).");
+                throw new JobParseException("Invalid dependency sign (=>).");
 
             // Validate dependency string
             if (lineComponents.Length > 3)
-                throw new ArgumentException("Invalid job dependency format.");
+                throw new JobParseException("Invalid job dependency format.");
 
             // Validate job name
             Regex alphabetPattern = new Regex("^[a-zA-Z]{1}$");
             if (!alphabetPattern.IsMatch(lineComponents[0]))
-                throw new ArgumentException("Invalid job name.");
+                throw new JobParseException("Invalid job name.");
             else
                 jobName = char.Parse(lineComponents[0]);
 
@@ -43,12 +44,12 @@ namespace OnTheBeach_CodingExercise
             if (lineComponents.Length <= 2)
                 return new IndependentJob(jobName);
             else if (!alphabetPattern.IsMatch(lineComponents[2]))
-                throw new ArgumentException("Invalid next job name.");
+                throw new JobParseException("Invalid next job name.");
             else
             {
                 nextJobName = char.Parse(lineComponents[2]);
                 if (jobName.Equals(nextJobName))
-                    throw new ArgumentException("Self-dependent.");
+                    throw new SelfDependentException("Self-dependent.");
                 return new DependentJob(jobName, nextJobName);
             }
         }
